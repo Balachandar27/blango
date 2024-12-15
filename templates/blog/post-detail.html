@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load blog_extras %}
+{% load blog_extras cache %}
 {% block content %}
 <h2>{{ post.title }}</h2>
 {% row %}
@@ -8,9 +8,11 @@
     {% endcol  %}
 {% endrow %}
 {% row %}
+    {% cache 3600 recent_posts %}
     {% col  %}
-        {{ post.content|safe }}
+        {{ post.content }}
     {% endcol  %}
+    {% endcache %}
 {% endrow %}
 {% include "blog/post-comments.html" %}
 {% endblock content %}
