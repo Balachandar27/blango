@@ -31,6 +31,6 @@ urlpatterns = [
     path("accounts/profile/", blango_auth.views.profile, name="profile"),
     path("", blog.views.index, name='blog-index'),
     path("post/<slug>/", blog.views.post_detail, name="blog-post-detail"),
-    path("api/v1/", include("blog.api_urls")),
+    path("api/v1/", include("blog.api.urls")),
 ]
 print(f"Time zone: {settings.TIME_ZONE}")
