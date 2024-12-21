@@ -34,3 +34,7 @@ urlpatterns = [
     path("api/v1/", include("blog.api.urls")),
 ]
 print(f"Time zone: {settings.TIME_ZONE}")
+
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+

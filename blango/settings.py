@@ -58,8 +58,16 @@ class Dev(Configuration):
         'crispy_forms',
         'crispy_bootstrap5',
         'rest_framework',
+        "drf_yasg",
 
     ]
+
+    SWAGGER_SETTINGS = {
+        "SECURITY_DEFINITIONS": {
+            "Token": {"type": "apiKey", "name": "Authorization", "in": "header"},
+            "Basic": {"type": "basic"},
+        }
+    }
 
     CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
     CRISPY_TEMPLATE_PACK = "bootstrap5"
