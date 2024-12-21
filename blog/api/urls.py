@@ -1,21 +1,22 @@
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
-
-from blog.api.api_views import PostList, PostDetail, UserDetail
-
-urlpatterns = [
-    path("posts/", PostList.as_view(), name="api_post_list"),
-    path("posts/<int:pk>/", PostDetail.as_view(), name="api_post_detail"),
-    path("users/<str:email>", UserDetail.as_view(), name="api_user_detail"),
-]
-
-urlpatterns = format_suffix_patterns(urlpatterns)
-
+from blog.api.api_views import PostList, PostDetail, UserDetail, TagViewSet, PostViewSet
+from rest_framework.routers import DefaultRouter
 from django.urls import path, include, re_path
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework.authtoken import views
 import os
+
+urlpatterns = [
+    # path("posts/", PostList.as_view(), name="api_post_list"),
+    # path("posts/<int:pk>/", PostDetail.as_view(), name="api_post_detail"),
+    path("users/<str:email>", UserDetail.as_view(), name="api_user_detail"),
+]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
+
+
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -41,3 +42,14 @@ urlpatterns += [
         name="schema-swagger-ui",
     ),
 ]
+
+router = DefaultRouter()
+router.register("tags", TagViewSet)
+router.register("posts", PostViewSet)
+
+urlpatterns += [
+    path("auth/", include("rest_framework.urls")),
+    # ... other patterns omitted
+    path("", include(router.urls)),
+]
+
