@@ -7,6 +7,9 @@ from blog.forms import CommentForm
 from django.http import HttpResponse
 import logging
 
+def post_table(request):
+    return render(request, "blog/post-table.html")
+    
 # Create your views here.
 # @cache_page(300)
 # @vary_on_cookie
