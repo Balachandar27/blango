@@ -72,12 +72,12 @@ while(i < 10) {
   i += 1
 }
 
-let i = 10
+let ii = 10
 
 do {
-  console.log(i)
-  i += 1
-} while(i < 10)
+  console.log(ii)
+  ii += 1
+} while(ii < 10)
 
 const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
@@ -88,3 +88,54 @@ numbers.forEach((value => {
 const doubled = numbers.map(value => value * 2)
 
 console.log(doubled)
+
+// class definition in JS
+class Greeter {
+  constructor (name) {
+    this.name = name
+  }
+
+  getGreeting () {
+    if (this.name === undefined) {
+      return 'Hello, no name'
+    }
+
+    return 'Hello, ' + this.name
+  }
+
+  showGreeting (greetingMessage) {
+    console.log(greetingMessage)
+  }
+
+  greet () {
+    this.showGreeting(this.getGreeting())
+  }
+}
+
+// class call in JS to create objects
+const g = new Greeter('Patchy')
+g.greet()
+
+//Inheritance
+class DelayedGreeter extends Greeter {
+  delay = 2000
+  constructor (name, delay) {
+    super(name)
+    if (delay !== undefined) {
+      this.delay = delay
+    }
+  }
+  greet () {
+    setTimeout(
+      () => {
+        this.showGreeting(this.getGreeting())
+      }, this.delay
+    )
+  }
+}
+
+const dg2 = new DelayedGreeter('Patchy 2 Seconds')
+dg2.greet()
+
+const dg1 = new DelayedGreeter('Patchy 1 Second', 1000)
+dg1.greet()
